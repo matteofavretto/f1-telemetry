@@ -1,6 +1,6 @@
 package org.matteofavretto.service;
 
-import org.matteofavretto.model.Driver;
+import org.matteofavretto.model.Meeting;
 import org.matteofavretto.utils.Utility;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,16 +11,17 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class DriversService {
+public class MeetingsService {
+
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public List<Driver> getDriver(Driver request) {
-        if (request.getDriverNumber() == null) {
-            throw new IllegalArgumentException("driverNumber is required");
+    public List<Meeting> getMeeting(Meeting request) {
+        if (request.getCountryName() == null) {
+            throw new IllegalArgumentException("countryName is required");
         }
-        URI uri = Utility.getDriverRequestBuilder(request);
+        URI uri = Utility.getMeetingRequestBuilder(request);
         System.out.println(uri);
-        Driver[] apiResponse = restTemplate.getForObject(uri, Driver[].class);
+        Meeting[] apiResponse = restTemplate.getForObject(uri, Meeting[].class);
 
         if(apiResponse == null) {
             return new ArrayList<>();

@@ -3,6 +3,7 @@ package org.matteofavretto.utils;
 import lombok.experimental.UtilityClass;
 import org.matteofavretto.model.CarData;
 import org.matteofavretto.model.Driver;
+import org.matteofavretto.model.Meeting;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -75,5 +76,47 @@ public class Utility {
         }
 
         return componentsBuilder.build().toUri();
+    }
+
+    public URI getMeetingRequestBuilder(Meeting request) {
+        UriComponentsBuilder componentsBuilder = UriComponentsBuilder.fromHttpUrl(Constants.F1_TELEMETRY_API + "/meetings")
+                .queryParam("country_name", request.getCountryName());
+
+        if (request.getCircuitKey() != null) {
+            componentsBuilder.queryParam("circuit_key", request.getCircuitKey());
+        }
+        if (request.getCircuitShortName() != null) {
+            componentsBuilder.queryParam("circuit_short_name", request.getCircuitShortName());
+        }
+        if (request.getCountryCode() != null) {
+            componentsBuilder.queryParam("country_code", request.getCountryCode());
+        }
+        if (request.getCountryKey() != null) {
+            componentsBuilder.queryParam("country_key", request.getCountryKey());
+        }
+        if (request.getDateStart() != null) {
+            componentsBuilder.queryParam("date_start", request.getDateStart());
+        }
+        if (request.getGmtOffset() != null) {
+            componentsBuilder.queryParam("gmt_offset", request.getGmtOffset());
+        }
+        if (request.getLocation() != null) {
+            componentsBuilder.queryParam("location", request.getLocation());
+        }
+        if (request.getMeetingKey() != null) {
+            componentsBuilder.queryParam("meeting_key", request.getMeetingKey());
+        }
+        if (request.getMeetingName() != null) {
+            componentsBuilder.queryParam("meeting_name", request.getMeetingName());
+        }
+        if (request.getMeetingOfficialName() != null) {
+            componentsBuilder.queryParam("meeting_official_name", request.getMeetingOfficialName());
+        }
+        if (request.getYear() != null) {
+            componentsBuilder.queryParam("year", request.getYear());
+        }
+
+        return componentsBuilder.build().toUri();
+
     }
 }
