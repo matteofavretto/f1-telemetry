@@ -59,15 +59,6 @@ public class Utility {
         if (request.getLastName() != null) {
             componentsBuilder.queryParam("last_name", request.getLastName());
         }
-        if (request.getSessionKey() != null) {
-            componentsBuilder.queryParam("session_key", request.getSessionKey());
-        }
-        if (request.getMeetingKey() != null) {
-            componentsBuilder.queryParam("meeting_key", request.getMeetingKey());
-        }
-        if (request.getMeetingKey() != null) {
-            componentsBuilder.queryParam("meeting_key", request.getMeetingKey());
-        }
         if (request.getNameAcronym() != null) {
             componentsBuilder.queryParam("name_acronym", request.getNameAcronym());
         }

@@ -23,8 +23,4 @@ public class Driver {
     private String teamName;
     @JsonProperty("team_colour")
     private String teamColour;
-    @JsonProperty("session_key")
-    private String sessionKey;
-    @JsonProperty("meeting_key")
-    private String meetingKey;
 }

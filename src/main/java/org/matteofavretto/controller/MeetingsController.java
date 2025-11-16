@@ -1,7 +1,7 @@
 package org.matteofavretto.controller;
 
 import org.matteofavretto.model.Meeting;
-import org.matteofavretto.service.MeetingsService;
+import org.matteofavretto.service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +16,13 @@ import java.util.List;
 public class MeetingsController {
 
     @Autowired
-    private MeetingsService meetingsService;
+    private MeetingService meetingService;
 
     @GetMapping("/meeting")
     public ResponseEntity<List<Meeting>> getMeeting(
             @ModelAttribute Meeting request
     )  {
-        List<Meeting> response = meetingsService.getMeeting(request);
+        List<Meeting> response = meetingService.getMeeting(request);
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
