@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class DriverStanding extends Driver {
     private Float points;
+    private int position;
 
     public DriverStanding(Driver driver, Float points) {
         this.setFirstName(driver.getFirstName());

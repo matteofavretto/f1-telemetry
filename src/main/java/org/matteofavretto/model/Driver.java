@@ -7,20 +7,20 @@ import java.net.URL;
 
 @Data
 public class Driver {
-    @JsonProperty("first_name")
+    @JsonProperty(value = "first_name")
     private String firstName;
-    @JsonProperty("last_name")
+    @JsonProperty(value = "last_name")
     private String lastName;
-    @JsonProperty("broadcast_name")
+    @JsonProperty(value = "broadcast_name")
     private String broadcastName;
-    @JsonProperty("name_acronym")
+    @JsonProperty(value = "name_acronym")
     private String nameAcronym;
-    @JsonProperty("driver_number")
+    @JsonProperty(value = "driver_number")
     private String driverNumber;
-    @JsonProperty("headshot_url")
+    @JsonProperty(value = "headshot_url")
     private URL headshotUrl;
-    @JsonProperty("team_name")
+    @JsonProperty(value = "team_name")
     private String teamName;
-    @JsonProperty("team_colour")
+    @JsonProperty(value = "team_colour")
     private String teamColour;
 }

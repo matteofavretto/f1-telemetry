@@ -8,10 +8,7 @@ import org.matteofavretto.model.SessionResult;
 import org.matteofavretto.utils.Constants;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,14 +26,19 @@ public class ChampionshipService {
 
         // Then get all the drivers by aggregating the participants in each race
         Map<String, Driver> drivers = new HashMap<>();
+        int requestCounter = 0;
         for(String sessionKey : sessionKeysMap.keySet()) {
             List<Driver> driversInRace = driverService.getDriversInSession(sessionKey);
             driversInRace.forEach(driver -> drivers.putIfAbsent(driver.getDriverNumber(), driver));
-            try {
-                Thread.sleep(350);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                throw new RuntimeException(e);
+            requestCounter++;
+            if(requestCounter == 3) {
+                try {
+                    Thread.sleep(1100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+                requestCounter = 0;
             }
         }
 
@@ -44,11 +46,15 @@ public class ChampionshipService {
         Map<String, List<SessionResult>> driverResultsMap = new HashMap<>();
         for(String sessionKey : sessionKeysMap.keySet()) {
             List<SessionResult> resultsForRace = sessionService.getSessionResult(sessionKey);
-            try {
-                Thread.sleep(350);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                throw new RuntimeException(e);
+            requestCounter++;
+            if(requestCounter == 3) {
+                try {
+                    Thread.sleep(1100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+                requestCounter = 0;
             }
             for (SessionResult sessionResult : resultsForRace) {
                 String driverNumber = String.valueOf(sessionResult.getDriverNumber());
@@ -69,6 +75,10 @@ public class ChampionshipService {
             }
             DriverStanding standing = new DriverStanding(drivers.get(driverNumber), points);
             standings.add(standing);
+        }
+        standings.sort(Comparator.comparing(DriverStanding::getPoints).reversed());
+        for(int i = 0; i < standings.size(); i++) {
+            standings.get(i).setPosition(i);
         }
         return standings;
     }
